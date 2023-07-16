@@ -6,6 +6,7 @@ import News from "../Pages/News/News";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import PrivateRoute from "./Privateroute/PrivateRoute";
+import TermsConditons from "../Pages/Shared/TermsConditions/TermsConditons";
 
 export const routes = createBrowserRouter([
     {
@@ -37,7 +38,14 @@ export const routes = createBrowserRouter([
                 path : '/register',
                 element: <Register></Register>
 
+            },
+            {
+                path : '/terms',
+                element: <TermsConditons></TermsConditons>
+
             }
+            
+
            
 
         ]
