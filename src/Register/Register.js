@@ -2,49 +2,43 @@ import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { AuthContext } from '../AuthProvider/AuthProvider';
-import { useLocation, useNavigate } from 'react-router-dom';
 
-
-const Login = () => { 
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+const Register = () => {
     const [error,setError] = useState('');
-    const [user,setUser] = useState('');
-    const navigate = useNavigate();
-    const {signIn} = useContext(AuthContext);
-    const  handleSubmit = event =>{
+    const {createUser} = useContext(AuthContext);
+    const handleSubmit  = event =>{
         event.preventDefault();
         const form = event.target;
-         
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        signIn(email,password)
+        createUser(email,password)
         .then (result =>{
             const user = result.user;
-            setUser(user);
+            setError('')
+            console.log(user);
             form.reset();
-            setError('');
-            navigate(from,{replace:true});
-            })
-           
-        .catch(error =>{
-            console.error(error)
-        setError(error.message);
-
-        } )
-        
-
+        })
+        .catch(e =>{
+            setError(e)
+            console.error(e)})
     }
-
     return (
         <div>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control name='email' type="email" placeholder="Enter email" />
+             <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Your Name</Form.Label>
+                    <Form.Control name='name' type="text" placeholder="Your Name" />
 
                 </Form.Group>
 
+                
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control name='email' type="email" placeholder="Email" />
+                </Form.Group>
+                
+                
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control name='password' type="password" placeholder="Password" />
@@ -55,15 +49,15 @@ const Login = () => {
                
 
                 <Button variant="primary" type="submit">
-                    Log In
+                   Sign Up
                 </Button>
-                <Form.Text className="text-danger">
+                <Form.Text className="danger">
                      {error}
                 </Form.Text>
             </Form>
-
+            
         </div>
     );
 };
 
-export default Login;
+export default Register;
