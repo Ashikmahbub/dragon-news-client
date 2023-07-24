@@ -46,7 +46,7 @@ const Header = () => {
 
             <Nav>
 
-              <Nav.Link href="#deets">
+              <Link to='/profile'>
                 {user?.uid ?
                   <>
                     <span>
@@ -59,11 +59,11 @@ const Header = () => {
 
                   :
                   <>
-                     <Link to='/login'><Button className="text-white mr-3" variant="primary">Login</Button></Link>
-                  
-                  <Link to='/register'>  <Button className="text-white" variant="primary">Register</Button></Link>
-                   
-                    
+                    <Link to='/login'><Button className="text-white mr-3" variant="primary">Login</Button></Link>
+
+                    <Link to='/register'>  <Button className="text-white" variant="primary">Register</Button></Link>
+
+
 
 
                   </>
@@ -74,19 +74,20 @@ const Header = () => {
 
 
 
-              </Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
-
-              </Nav.Link>
-              {user?.photoURL ?
-                <Image
-                  style={{ height: '40px' }} roundedCircle
-                  src={user.photoURL}>
+              </Link>
+              <Link to= '/profile'>
+                {user?.photoURL ?
+                  <Image
+                    style={{ height: '40px' }} roundedCircle
+                    src={user.photoURL}>
 
 
-                </Image>
-                : <FaUser></FaUser>
-              }
+                  </Image>
+                  : <FaUser></FaUser>
+                }
+
+              </Link>
+
             </Nav>
             <div className="d-lg-none" >
               <LeftSideNav>
